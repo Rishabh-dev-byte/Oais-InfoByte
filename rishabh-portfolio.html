@@ -1,0 +1,1223 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rishabh Tiwari — Full Stack Developer</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=Fira+Code:wght@400;500;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #1DB954;
+            --secondary: #1ED760;
+            --accent: #FF6B6B;
+            --dark: #121212;
+            --dark-elevated: #1A1A1A;
+            --dark-card: #282828;
+            --light: #FFFFFF;
+            --gray: #B3B3B3;
+            --border: #2A2A2A;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Outfit', sans-serif;
+            background: var(--dark);
+            color: var(--light);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        ::selection {
+            background: var(--primary);
+            color: var(--dark);
+        }
+
+        /* Animated Background */
+        .animated-bg {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            overflow: hidden;
+        }
+
+        .gradient-orb {
+            position: absolute;
+            border-radius: 50%;
+            filter: blur(120px);
+            opacity: 0.15;
+            animation: float 25s ease-in-out infinite;
+        }
+
+        .orb-1 {
+            width: 500px;
+            height: 500px;
+            background: var(--primary);
+            top: -100px;
+            right: -100px;
+            animation-delay: 0s;
+        }
+
+        .orb-2 {
+            width: 400px;
+            height: 400px;
+            background: var(--accent);
+            bottom: -100px;
+            left: -100px;
+            animation-delay: 8s;
+        }
+
+        .orb-3 {
+            width: 600px;
+            height: 600px;
+            background: var(--secondary);
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            animation-delay: 15s;
+        }
+
+        @keyframes float {
+            0%, 100% {
+                transform: translate(0, 0) scale(1);
+            }
+            33% {
+                transform: translate(50px, -50px) scale(1.1);
+            }
+            66% {
+                transform: translate(-50px, 50px) scale(0.9);
+            }
+        }
+
+        /* Navigation */
+        nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: rgba(18, 18, 18, 0.95);
+            backdrop-filter: blur(20px);
+            z-index: 1000;
+            border-bottom: 1px solid var(--border);
+            animation: slideDown 0.6s ease-out;
+        }
+
+        @keyframes slideDown {
+            from {
+                transform: translateY(-100%);
+                opacity: 0;
+            }
+            to {
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+
+        .nav-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 1.5rem 3rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .nav-logo {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--light);
+            text-decoration: none;
+            letter-spacing: -0.02em;
+        }
+
+        .nav-logo span {
+            color: var(--primary);
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2.5rem;
+            list-style: none;
+            align-items: center;
+        }
+
+        .nav-links a {
+            color: var(--gray);
+            text-decoration: none;
+            font-size: 0.95rem;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--primary);
+            transition: width 0.3s ease;
+        }
+
+        .nav-links a:hover {
+            color: var(--primary);
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        .github-btn {
+            background: transparent;
+            color: var(--light);
+            padding: 0.7rem 1.5rem;
+            border: 2px solid var(--primary);
+            border-radius: 50px;
+            font-weight: 600;
+            font-size: 0.9rem;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: inline-block;
+        }
+
+        .github-btn:hover {
+            background: var(--primary);
+            color: var(--dark);
+            transform: translateY(-2px);
+            box-shadow: 0 10px 30px rgba(29, 185, 84, 0.3);
+        }
+
+        /* Hero Section */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            padding: 8rem 3rem 5rem;
+            position: relative;
+        }
+
+        .hero-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 5rem;
+            align-items: center;
+        }
+
+        .hero-content {
+            animation: fadeInLeft 0.8s ease-out;
+        }
+
+        @keyframes fadeInLeft {
+            from {
+                opacity: 0;
+                transform: translateX(-40px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        .hero-tag {
+            display: inline-block;
+            font-family: 'Fira Code', monospace;
+            font-size: 0.9rem;
+            color: var(--primary);
+            background: rgba(29, 185, 84, 0.1);
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            margin-bottom: 1.5rem;
+            border: 1px solid rgba(29, 185, 84, 0.3);
+        }
+
+        .hero-title {
+            font-size: clamp(3rem, 7vw, 5rem);
+            font-weight: 800;
+            line-height: 1.1;
+            margin-bottom: 1.5rem;
+            background: linear-gradient(135deg, var(--light) 0%, var(--primary) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .hero-subtitle {
+            font-size: 1.8rem;
+            color: var(--gray);
+            margin-bottom: 2rem;
+            font-weight: 500;
+        }
+
+        .tech-stack {
+            display: flex;
+            gap: 1rem;
+            flex-wrap: wrap;
+            margin-bottom: 3rem;
+        }
+
+        .tech-badge {
+            background: var(--dark-card);
+            color: var(--primary);
+            padding: 0.6rem 1.2rem;
+            border-radius: 8px;
+            font-size: 0.9rem;
+            font-weight: 600;
+            border: 1px solid var(--border);
+            transition: all 0.3s ease;
+        }
+
+        .tech-badge:hover {
+            background: var(--primary);
+            color: var(--dark);
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(29, 185, 84, 0.3);
+        }
+
+        .hero-buttons {
+            display: flex;
+            gap: 1.5rem;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            padding: 1.1rem 2.5rem;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+            display: inline-block;
+            border-radius: 50px;
+        }
+
+        .btn-primary {
+            background: var(--primary);
+            color: var(--dark);
+            border: 2px solid var(--primary);
+        }
+
+        .btn-primary:hover {
+            background: transparent;
+            color: var(--primary);
+            transform: translateY(-3px);
+            box-shadow: 0 10px 30px rgba(29, 185, 84, 0.3);
+        }
+
+        .btn-secondary {
+            background: transparent;
+            color: var(--light);
+            border: 2px solid var(--light);
+        }
+
+        .btn-secondary:hover {
+            background: var(--light);
+            color: var(--dark);
+            transform: translateY(-3px);
+        }
+
+        .hero-image {
+            position: relative;
+            animation: fadeInRight 0.8s ease-out;
+        }
+
+        @keyframes fadeInRight {
+            from {
+                opacity: 0;
+                transform: translateX(40px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        .profile-card {
+            background: linear-gradient(135deg, var(--dark-elevated), var(--dark-card));
+            padding: 3rem;
+            border-radius: 20px;
+            border: 1px solid var(--border);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .profile-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 4px;
+            background: linear-gradient(90deg, var(--primary), var(--secondary));
+        }
+
+        .profile-img {
+            width: 180px;
+            height: 180px;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            border-radius: 50%;
+            margin: 0 auto 2rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 4rem;
+            font-weight: 700;
+            border: 4px solid var(--dark);
+            box-shadow: 0 20px 40px rgba(29, 185, 84, 0.2);
+        }
+
+        .profile-info {
+            text-align: center;
+        }
+
+        .profile-name {
+            font-size: 1.8rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+        }
+
+        .profile-role {
+            color: var(--primary);
+            font-size: 1.1rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .profile-stats {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1.5rem;
+            margin-top: 2rem;
+            padding-top: 2rem;
+            border-top: 1px solid var(--border);
+        }
+
+        .stat {
+            text-align: center;
+        }
+
+        .stat-number {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: var(--primary);
+            font-family: 'Fira Code', monospace;
+        }
+
+        .stat-label {
+            font-size: 0.85rem;
+            color: var(--gray);
+            margin-top: 0.3rem;
+        }
+
+        /* About Section */
+        .about {
+            padding: 8rem 3rem;
+            background: var(--dark-elevated);
+        }
+
+        .about-container {
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 5rem;
+        }
+
+        .section-tag {
+            font-family: 'Fira Code', monospace;
+            font-size: 0.85rem;
+            color: var(--primary);
+            text-transform: uppercase;
+            letter-spacing: 0.15em;
+            margin-bottom: 1rem;
+            display: inline-block;
+        }
+
+        .section-title {
+            font-size: clamp(2.5rem, 5vw, 4rem);
+            font-weight: 800;
+            margin-bottom: 1.5rem;
+        }
+
+        .section-description {
+            font-size: 1.2rem;
+            color: var(--gray);
+            max-width: 700px;
+            margin: 0 auto;
+        }
+
+        .about-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 5rem;
+            align-items: start;
+        }
+
+        .about-text {
+            font-size: 1.1rem;
+            color: var(--gray);
+            line-height: 1.9;
+        }
+
+        .about-text p {
+            margin-bottom: 1.5rem;
+        }
+
+        .highlight {
+            color: var(--primary);
+            font-weight: 600;
+        }
+
+        .skills-list {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 1.5rem;
+        }
+
+        .skill-item {
+            background: var(--dark-card);
+            padding: 1.5rem;
+            border-radius: 12px;
+            border: 1px solid var(--border);
+            transition: all 0.3s ease;
+        }
+
+        .skill-item:hover {
+            border-color: var(--primary);
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(29, 185, 84, 0.1);
+        }
+
+        .skill-icon {
+            font-size: 2rem;
+            margin-bottom: 1rem;
+            display: block;
+        }
+
+        .skill-name {
+            font-size: 1.2rem;
+            font-weight: 600;
+            color: var(--light);
+            margin-bottom: 0.5rem;
+        }
+
+        .skill-level {
+            color: var(--gray);
+            font-size: 0.9rem;
+        }
+
+        /* Projects Section */
+        .projects {
+            padding: 8rem 3rem;
+            background: var(--dark);
+        }
+
+        .projects-container {
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 2.5rem;
+        }
+
+        .project-card {
+            background: var(--dark-card);
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            overflow: hidden;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            cursor: pointer;
+        }
+
+        .project-card:hover {
+            transform: translateY(-10px);
+            border-color: var(--primary);
+            box-shadow: 0 20px 60px rgba(29, 185, 84, 0.2);
+        }
+
+        .project-image {
+            width: 100%;
+            aspect-ratio: 16/9;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 5rem;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .project-featured {
+            background: linear-gradient(135deg, #1DB954, #1ED760);
+        }
+
+        .project-image::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.3);
+            opacity: 0;
+            transition: opacity 0.4s ease;
+        }
+
+        .project-card:hover .project-image::after {
+            opacity: 1;
+        }
+
+        .project-content {
+            padding: 2rem;
+        }
+
+        .project-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: start;
+            margin-bottom: 1rem;
+        }
+
+        .project-title {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: var(--light);
+            margin-bottom: 0.5rem;
+        }
+
+        .featured-badge {
+            background: var(--primary);
+            color: var(--dark);
+            font-size: 0.75rem;
+            padding: 0.4rem 0.8rem;
+            border-radius: 20px;
+            font-weight: 600;
+            text-transform: uppercase;
+        }
+
+        .project-description {
+            color: var(--gray);
+            line-height: 1.8;
+            margin-bottom: 1.5rem;
+        }
+
+        .project-tech {
+            display: flex;
+            gap: 0.8rem;
+            flex-wrap: wrap;
+            margin-bottom: 1.5rem;
+        }
+
+        .tech-tag {
+            font-family: 'Fira Code', monospace;
+            font-size: 0.8rem;
+            color: var(--primary);
+            background: rgba(29, 185, 84, 0.1);
+            padding: 0.4rem 0.8rem;
+            border-radius: 6px;
+            border: 1px solid rgba(29, 185, 84, 0.3);
+        }
+
+        .project-links {
+            display: flex;
+            gap: 1rem;
+        }
+
+        .project-link {
+            flex: 1;
+            text-align: center;
+            padding: 0.8rem;
+            background: transparent;
+            color: var(--primary);
+            text-decoration: none;
+            border: 1px solid var(--primary);
+            border-radius: 8px;
+            font-weight: 600;
+            font-size: 0.9rem;
+            transition: all 0.3s ease;
+        }
+
+        .project-link:hover {
+            background: var(--primary);
+            color: var(--dark);
+        }
+
+        /* Contact Section */
+        .contact {
+            padding: 8rem 3rem;
+            background: var(--dark-elevated);
+        }
+
+        .contact-container {
+            max-width: 900px;
+            margin: 0 auto;
+            text-align: center;
+        }
+
+        .contact-content {
+            background: var(--dark-card);
+            padding: 4rem;
+            border-radius: 20px;
+            border: 1px solid var(--border);
+            margin-top: 3rem;
+        }
+
+        .contact-info {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 2rem;
+            margin-bottom: 3rem;
+        }
+
+        .contact-item {
+            text-align: center;
+        }
+
+        .contact-icon {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .contact-label {
+            font-size: 0.9rem;
+            color: var(--gray);
+            margin-bottom: 0.5rem;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+        }
+
+        .contact-value {
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: var(--light);
+        }
+
+        .contact-value a {
+            color: var(--primary);
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        .contact-value a:hover {
+            color: var(--secondary);
+        }
+
+        .social-links {
+            display: flex;
+            justify-content: center;
+            gap: 1.5rem;
+            margin-top: 3rem;
+        }
+
+        .social-link {
+            width: 60px;
+            height: 60px;
+            background: var(--dark);
+            border: 2px solid var(--border);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-decoration: none;
+            color: var(--light);
+            font-size: 1.5rem;
+            transition: all 0.3s ease;
+        }
+
+        .social-link:hover {
+            background: var(--primary);
+            border-color: var(--primary);
+            color: var(--dark);
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(29, 185, 84, 0.3);
+        }
+
+        /* Footer */
+        footer {
+            background: var(--dark);
+            padding: 3rem;
+            border-top: 1px solid var(--border);
+        }
+
+        .footer-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            text-align: center;
+        }
+
+        .footer-text {
+            color: var(--gray);
+            font-size: 0.95rem;
+        }
+
+        .footer-text a {
+            color: var(--primary);
+            text-decoration: none;
+            font-weight: 600;
+        }
+
+        .footer-text a:hover {
+            text-decoration: underline;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 1024px) {
+            .hero-container {
+                grid-template-columns: 1fr;
+                gap: 3rem;
+            }
+
+            .hero-image {
+                order: -1;
+            }
+
+            .about-content {
+                grid-template-columns: 1fr;
+                gap: 3rem;
+            }
+
+            .skills-list {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .nav-container {
+                padding: 1rem 1.5rem;
+            }
+
+            .nav-links {
+                gap: 1.5rem;
+            }
+
+            .nav-links a:not(.github-btn) {
+                display: none;
+            }
+
+            .hero,
+            .about,
+            .projects,
+            .contact {
+                padding: 5rem 1.5rem;
+            }
+
+            .hero-buttons {
+                flex-direction: column;
+            }
+
+            .btn {
+                width: 100%;
+                text-align: center;
+            }
+
+            .profile-stats {
+                grid-template-columns: 1fr;
+                gap: 1rem;
+            }
+
+            .projects-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .contact-content {
+                padding: 2rem;
+            }
+
+            .contact-info {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        /* Scroll reveal animation */
+        .reveal {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.8s ease-out;
+        }
+
+        .reveal.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    </style>
+</head>
+<body>
+    <!-- Animated Background -->
+    <div class="animated-bg">
+        <div class="gradient-orb orb-1"></div>
+        <div class="gradient-orb orb-2"></div>
+        <div class="gradient-orb orb-3"></div>
+    </div>
+
+    <!-- Navigation -->
+    <nav>
+        <div class="nav-container">
+            <a href="#" class="nav-logo">Rishabh<span>.</span>Tiwari</a>
+            <ul class="nav-links">
+                <li><a href="#about">About</a></li>
+                <li><a href="#projects">Projects</a></li>
+                <li><a href="#contact">Contact</a></li>
+                <li><a href="https://github.com/Rishabh-dev-byte" class="github-btn" target="_blank">GitHub</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero" id="home">
+        <div class="hero-container">
+            <div class="hero-content">
+                <span class="hero-tag">🎓 Computer Engineering Student | Full Stack Developer</span>
+                <h1 class="hero-title">Hi, I'm Rishabh Tiwari</h1>
+                <p class="hero-subtitle">Building dynamic web applications with React & Express</p>
+                <div class="tech-stack">
+                    <span class="tech-badge">React.js</span>
+                    <span class="tech-badge">Express.js</span>
+                    <span class="tech-badge">Node.js</span>
+                    <span class="tech-badge">JavaScript</span>
+                    <span class="tech-badge">MongoDB</span>
+                    <span class="tech-badge">MySQL</span>
+                    <span class="tech-badge">Supabase</span>
+                    <span class="tech-badge">Appwrite</span>
+                </div>
+                <div class="hero-buttons">
+                    <a href="#projects" class="btn btn-primary">View Projects</a>
+                    <a href="#contact" class="btn btn-secondary">Get In Touch</a>
+                </div>
+            </div>
+            <div class="hero-image">
+                <div class="profile-card">
+                    <div class="profile-img">RT</div>
+                    <div class="profile-info">
+                        <h2 class="profile-name">Rishabh Tiwari</h2>
+                        <p class="profile-role">Full Stack Developer</p>
+                        <div class="profile-stats">
+                            <div class="stat">
+                                <div class="stat-number">5+</div>
+                                <div class="stat-label">Projects</div>
+                            </div>
+                            <div class="stat">
+                                <div class="stat-number">2</div>
+                                <div class="stat-label">Hackathons</div>
+                            </div>
+                            <div class="stat">
+                                <div class="stat-number">8.54</div>
+                                <div class="stat-label">CGPI</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section class="about" id="about">
+        <div class="about-container">
+            <div class="section-header">
+                <span class="section-tag">// About Me</span>
+                <h2 class="section-title">Passion Meets Code</h2>
+                <p class="section-description">
+                    Crafting seamless user experiences with modern web technologies
+                </p>
+            </div>
+            <div class="about-content">
+                <div class="about-text">
+                    <p>
+                        I'm a <span class="highlight">Third-year Computer Engineering student</span> at Lokmanya Tilak 
+                        College of Engineering (University of Mumbai) with a <span class="highlight">CGPI of 8.54</span>. 
+                        I specialize in building exceptional web applications using the <span class="highlight">MERN stack</span>, 
+                        with expertise in <span class="highlight">React.js</span>, <span class="highlight">Express.js</span>, 
+                        and modern backend technologies like Supabase and Appwrite.
+                    </p>
+                    <p>
+                        My journey in web development has been marked by significant achievements, including being a 
+                        <span class="highlight">Finalist (Top 140 Teams)</span> in the NextGen Hackathon 2025 by ACM 
+                        Fremont Chapter and <span class="highlight">Finalist (Top 100 Teams)</span> in the AWS ImpactX 
+                        Challenge Hackathon at IIT Bombay. These experiences have honed my skills in full-stack development, 
+                        problem-solving, and building production-ready applications.
+                    </p>
+                    <p>
+                        I'm passionate about creating user-centric applications with clean UI/UX, implementing secure 
+                        authentication systems, and working with modern frameworks. Currently seeking opportunities as a 
+                        Graduate Engineer Trainee to contribute to real-world software projects and continue growing as a developer.
+                    </p>
+                </div>
+                <div class="skills-list">
+                    <div class="skill-item">
+                        <span class="skill-icon">⚛️</span>
+                        <div class="skill-name">React.js</div>
+                        <div class="skill-level">Advanced</div>
+                    </div>
+                    <div class="skill-item">
+                        <span class="skill-icon">🚀</span>
+                        <div class="skill-name">Express.js</div>
+                        <div class="skill-level">Advanced</div>
+                    </div>
+                    <div class="skill-item">
+                        <span class="skill-icon">💚</span>
+                        <div class="skill-name">Node.js</div>
+                        <div class="skill-level">Advanced</div>
+                    </div>
+                    <div class="skill-item">
+                        <span class="skill-icon">🍃</span>
+                        <div class="skill-name">MongoDB</div>
+                        <div class="skill-level">Intermediate</div>
+                    </div>
+                    <div class="skill-item">
+                        <span class="skill-icon">🗄️</span>
+                        <div class="skill-name">MySQL</div>
+                        <div class="skill-level">Intermediate</div>
+                    </div>
+                    <div class="skill-item">
+                        <span class="skill-icon">⚡</span>
+                        <div class="skill-name">Supabase</div>
+                        <div class="skill-level">Advanced</div>
+                    </div>
+                    <div class="skill-item">
+                        <span class="skill-icon">☁️</span>
+                        <div class="skill-name">Appwrite</div>
+                        <div class="skill-level">Intermediate</div>
+                    </div>
+                    <div class="skill-item">
+                        <span class="skill-icon">🔐</span>
+                        <div class="skill-name">Clerk Auth</div>
+                        <div class="skill-level">Intermediate</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Projects Section -->
+    <section class="projects" id="projects">
+        <div class="projects-container">
+            <div class="section-header">
+                <span class="section-tag">// My Work</span>
+                <h2 class="section-title">Featured Projects</h2>
+                <p class="section-description">
+                    A showcase of my best work in full-stack development
+                </p>
+            </div>
+            <div class="projects-grid">
+                <div class="project-card">
+                    <div class="project-image project-featured">🎵</div>
+                    <div class="project-content">
+                        <div class="project-header">
+                            <h3 class="project-title">Spotify Clone</h3>
+                            <span class="featured-badge">Featured</span>
+                        </div>
+                        <p class="project-description">
+                            A fully functional Spotify clone built with React.js and Express.js. Features include 
+                            music playback, playlist creation, user authentication, search functionality, and a 
+                            beautiful, responsive UI that mirrors Spotify's design.
+                        </p>
+                        <div class="project-tech">
+                            <span class="tech-tag">React.js</span>
+                            <span class="tech-tag">Express.js</span>
+                            <span class="tech-tag">Node.js</span>
+                            <span class="tech-tag">MongoDB</span>
+                            <span class="tech-tag">REST API</span>
+                        </div>
+                        <div class="project-links">
+                            <a href="https://github.com/Rishabh-dev-byte/Spotify-Clone" class="project-link" target="_blank">View Code</a>
+                            <a href="#" class="project-link">Live Demo</a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="project-card">
+                    <div class="project-image" style="background: linear-gradient(135deg, #667eea, #764ba2);">💼</div>
+                    <div class="project-content">
+                        <div class="project-header">
+                            <h3 class="project-title">getHired - Job Portal</h3>
+                        </div>
+                        <p class="project-description">
+                            Full-stack Job Portal web application using React.js and Supabase, with Clerk for secure 
+                            authentication and role-based access (recruiter and job seeker). Features include job posting, 
+                            job search and filtering, job applications, and application tracking with modern UI using shadcn/ui.
+                        </p>
+                        <div class="project-tech">
+                            <span class="tech-tag">React.js</span>
+                            <span class="tech-tag">Supabase</span>
+                            <span class="tech-tag">Clerk Auth</span>
+                            <span class="tech-tag">shadcn/ui</span>
+                        </div>
+                        <div class="project-links">
+                            <a href="https://github.com/Rishabh-dev-byte" class="project-link" target="_blank">View Code</a>
+                            <a href="#" class="project-link">Live Demo</a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="project-card">
+                    <div class="project-image" style="background: linear-gradient(135deg, #f093fb, #f5576c);">📝</div>
+                    <div class="project-content">
+                        <div class="project-header">
+                            <h3 class="project-title">Blog Website</h3>
+                        </div>
+                        <p class="project-description">
+                            Full-stack blog application using React.js and Appwrite, featuring user authentication 
+                            (login/signup), role-based protected routes, and full CRUD functionality for blog posts. 
+                            Developed a responsive, user-friendly UI with React hooks for efficient state management.
+                        </p>
+                        <div class="project-tech">
+                            <span class="tech-tag">React.js</span>
+                            <span class="tech-tag">Appwrite</span>
+                            <span class="tech-tag">React Hooks</span>
+                            <span class="tech-tag">CRUD</span>
+                        </div>
+                        <div class="project-links">
+                            <a href="https://github.com/Rishabh-dev-byte" class="project-link" target="_blank">View Code</a>
+                            <a href="#" class="project-link">Live Demo</a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="project-card">
+                    <div class="project-image" style="background: linear-gradient(135deg, #4facfe, #00f2fe);">🔍</div>
+                    <div class="project-content">
+                        <div class="project-header">
+                            <h3 class="project-title">Deepfake Detection System</h3>
+                        </div>
+                        <p class="project-description">
+                            Built for NextGen Hackathon 2025 (Finalist - Top 140 Teams). Deepfake detection system 
+                            for images, videos, and live streams, with a React.js-based frontend integrated with deep 
+                            learning models for real-time detection and analysis.
+                        </p>
+                        <div class="project-tech">
+                            <span class="tech-tag">React.js</span>
+                            <span class="tech-tag">Deep Learning</span>
+                            <span class="tech-tag">Python</span>
+                            <span class="tech-tag">OpenCV</span>
+                        </div>
+                        <div class="project-links">
+                            <a href="https://github.com/Rishabh-dev-byte" class="project-link" target="_blank">View Code</a>
+                            <a href="#" class="project-link">Live Demo</a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="project-card">
+                    <div class="project-image" style="background: linear-gradient(135deg, #fa709a, #fee140);">📄</div>
+                    <div class="project-content">
+                        <div class="project-header">
+                            <h3 class="project-title">OCR Exam Evaluation System</h3>
+                        </div>
+                        <p class="project-description">
+                            Built for AWS ImpactX Challenge Hackathon, IIT Bombay (Finalist - Top 100 Teams). OCR-based 
+                            exam paper evaluation system using React.js and Supabase to extract and evaluate answers 
+                            from scanned papers with automated grading.
+                        </p>
+                        <div class="project-tech">
+                            <span class="tech-tag">React.js</span>
+                            <span class="tech-tag">Supabase</span>
+                            <span class="tech-tag">OCR</span>
+                            <span class="tech-tag">AWS</span>
+                        </div>
+                        <div class="project-links">
+                            <a href="https://github.com/Rishabh-dev-byte" class="project-link" target="_blank">View Code</a>
+                            <a href="#" class="project-link">Live Demo</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section class="contact" id="contact">
+        <div class="contact-container">
+            <div class="section-header">
+                <span class="section-tag">// Get In Touch</span>
+                <h2 class="section-title">Let's Build Something Amazing</h2>
+                <p class="section-description">
+                    I'm always open to discussing new projects, creative ideas, or opportunities to be part of your vision
+                </p>
+            </div>
+            <div class="contact-content">
+                <div class="contact-info">
+                    <div class="contact-item">
+                        <div class="contact-icon">📧</div>
+                        <div class="contact-label">Email</div>
+                        <div class="contact-value">
+                            <a href="mailto:rishabhtiwari3479@gmail.com">rishabhtiwari3479@gmail.com</a>
+                        </div>
+                    </div>
+                    <div class="contact-item">
+                        <div class="contact-icon">📱</div>
+                        <div class="contact-label">Phone</div>
+                        <div class="contact-value">
+                            <a href="tel:+919987022004">+91 99870 22004</a>
+                        </div>
+                    </div>
+                    <div class="contact-item">
+                        <div class="contact-icon">💼</div>
+                        <div class="contact-label">GitHub</div>
+                        <div class="contact-value">
+                            <a href="https://github.com/Rishabh-dev-byte" target="_blank">Rishabh-dev-byte</a>
+                        </div>
+                    </div>
+                    <div class="contact-item">
+                        <div class="contact-icon">🌍</div>
+                        <div class="contact-label">Location</div>
+                        <div class="contact-value">Mumbai, India</div>
+                    </div>
+                </div>
+                <div class="social-links">
+                    <a href="https://github.com/Rishabh-dev-byte" class="social-link" target="_blank" title="GitHub">GH</a>
+                    <a href="#" class="social-link" title="LinkedIn">in</a>
+                    <a href="#" class="social-link" title="Twitter">𝕏</a>
+                    <a href="#" class="social-link" title="Email">@</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-container">
+            <p class="footer-text">
+                &copy; 2026 Rishabh Tiwari. Built with 💚 using React.js & Express.js | 
+                <a href="https://github.com/Rishabh-dev-byte" target="_blank">View Source on GitHub</a>
+            </p>
+        </div>
+    </footer>
+
+    <script>
+        // Scroll reveal animation
+        const reveals = document.querySelectorAll('.reveal');
+        
+        function checkScroll() {
+            reveals.forEach(element => {
+                const elementTop = element.getBoundingClientRect().top;
+                const windowHeight = window.innerHeight;
+                
+                if (elementTop < windowHeight - 100) {
+                    element.classList.add('active');
+                }
+            });
+        }
+        
+        window.addEventListener('scroll', checkScroll);
+        checkScroll();
+    </script>
+</body>
+</html>
